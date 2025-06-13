@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECARE - Réservation</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="picture/logoof.jpg" alt="Logo SECARE" class="logo">
+        </a>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="coiffeurChoise.html">Espace Coiffeur</a>
+            
+        </nav>
+    </header>
+
+    <main class="reservation-container">
+        <!-- ÉTAPE 1 : DATE ET HEURE -->
+        <section class="card step step-1">
+            <div class="card__header">
+                <h2>Choisissez une date</h2>
+            </div>
+            <div class="card__body">
+                <div class="calendar-nav">
+                    <button id="prevMonth">&#8592;</button>
+                    <div>
+                        <h3 id="calendar-day">Lundi</h3>
+                        <h3 id="calendar-date">1 Janvier 2025</h3>
+                    </div>
+                    <button id="nextMonth">&#8594;</button>
+                </div>
+
+                <ul class="card__body--days">
+                    <li>lun</li><li>mar</li><li>mer</li><li>jeu</li><li>ven</li><li>sam</li><li>dim</li>
+                </ul>
+                <ul class="card__body--dates" id="calendar-dates">
+                    <!-- Dates dynamiques -->
+                </ul>
+
+                <h3 class="horaire-title">Créneaux disponibles</h3>
+                <div id="time-slots" class="slots-container">
+                    <!-- Créneaux horaires -->
+                </div>
+            </div>
+            <div class="card__footer">
+                <button id="goToStep2" class="btn-next-step" style="display: none;">Étape suivante</button>
+
+            </div>
+        </section>
+
+        <!-- ÉTAPE 2 : COUPE ET COMMENTAIRE -->
+        <section class="card step step-2" style="display: none;">
+            <div class="card-header">
+              <h2>Détails de la coupe</h2>
+            </div>
+          
+            <div class="card-body">
+              <div class="champ-identite">
+                <label for="client-nom">Nom :</label>
+                <input type="text" id="client-nom" placeholder="Votre nom" required>
+          
+                <label for="client-prenom">Prénom :</label>
+                <input type="text" id="client-prenom" placeholder="Votre prénom" required>
+
+
+                <label for="email">Entrer votre email</label>
+                <input type="email" id="email" placehorlder="Votre email" required>
+          
+                <label for="telephone">Téléphone (optionnel) :</label>
+                <input type="text" id="telephone" placeholder="06 12 34 56 78">
+              </div>
+          
+              <div class="categorie">
+                <label><input type="radio" name="categorie" value="Homme" checked> Homme</label>
+                <label><input type="radio" name="categorie" value="Femme"> Femme</label>
+              </div>
+          
+              <div class="champ-coupe">
+                <label for="coupe">Type de coupe :</label>
+                <input type="text" id="coupe" placeholder="Ex : dégradé haut">
+              </div>
+          
+              <div class="champ-commentaire">
+                <label for="commentaire">Commentaire :</label>
+                <textarea id="commentaire" rows="4" placeholder="Vous pouvez décrire la coupe souhaitée..."></textarea>
+              </div>
+            </div>
+          
+            <div class="card-footer">
+              <button id="valider-reservation">Confirmer la réservation</button>
+            </div>
+          </section>
+          
+        <!-- ÉTAPE 3 : CONFIRMATION -->
+        <section class="card step step-3" style="display: none; text-align: center;">
+            <div class="card__body">
+                <h2>Merci pour votre réservation !</h2>
+                <p id="recapitulatif"></p>
+                <a href="index.html" class="btn">Retour à l'accueil</a>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="scripts/reservation.js"></script>
+
+</body>
+</html>

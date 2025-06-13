@@ -1,0 +1,84 @@
+:root {
+  --gradient: linear-gradient(to left top, #ff1b1b 10%, #e70c0c 90%) !important;
+}
+
+body {
+  background: #111 !important;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+}
+
+/* Grille centrée avec 2 colonnes fixes */
+.coiffeur-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Toujours 2 colonnes */
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  max-width: 700px;        
+  margin: 0 auto;        
+}
+
+/* Carte coiffeur */
+.coiffeur-card {
+  background: #ffffff;
+  color: #111;
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.coiffeur-card:hover {
+  transform: scale(1.015);
+}
+
+.coiffeur-card img {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 2px solid #080808;
+}
+
+.coiffeur-card h3 {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin: 0.2rem 0 0.5rem;
+}
+
+.coiffeur-card p {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.coiffeur-card button {
+  background: #000;
+  color: #fff6f6;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.coiffeur-card button:hover {
+  background: #222222;
+}
+
+/* Si très petit écran, repli en 1 colonne */
+@media (max-width: 420px) {
+  .coiffeur-list {
+    grid-template-columns: 1fr;
+  }
+}

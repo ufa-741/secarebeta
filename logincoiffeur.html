@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SECARE - Espace Coiffeur</title>
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/coiffeur.css" />
+</head>
+<body class="coiffeur page-auth">
+  <header class="coiffeur-header">
+   <a href="index.html">
+    <img src="picture/logoof.jpg" alt="Logo SECARE" class="logo">
+    
+    </a>
+    <nav>
+      
+    </nav>
+  </header>
+  
+  <div class="auth-wrapper"></div>
+    <img class="background-img" src="picture/histoire.png" alt="Coiffeuse Secare avec fond blanc" />
+    <div class="auth-container">
+      <div class="tabs">
+        <button id="show-login" class="active">Connexion</button>
+        <button id="show-signup">Inscription</button>
+        
+
+      </div>
+
+      <div id="login-form" class="form">
+        <h2>Connexion</h2>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Mot de passe">
+        <button id="login-btn">Se connecter</button>
+      </div>
+
+      <div id="signup-form" class="form hidden">
+        <h2>Inscription</h2>
+        <input type="text" id="signup-prenom" placeholder="Prénom">
+        <input type="text" id="signup-nom" placeholder="Nom">
+        <input type="email" id="signup-email" placeholder="Email">
+        <input type="password" id="signup-password" placeholder="Mot de passe">
+        <button id="signup-btn">Créer un compte</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/login.js"></script>
+</body>
+</html>
