@@ -24,8 +24,8 @@ body {
 .coiffeur-card {
   background: #ffffff;
   color: #111;
-  border-radius: 12px;
-  padding: 1.5rem 1rem;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
   text-align: center;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   display: flex;
@@ -39,12 +39,12 @@ body {
 }
 
 .coiffeur-card img {
-  width: 200px;
+  width: 250px;
   height: 200px;
   border-radius: 12px;
   object-fit: cover;
-  margin-bottom: 1rem;
-  border: 2px solid #080808;
+  margin-bottom: 4rem;
+  border: 4px solid #080808;
 }
 
 .coiffeur-card h3 {
@@ -63,7 +63,7 @@ body {
 .coiffeur-card button {
   background: #000;
   color: #fff6f6;
-  padding: 0.6rem 1.2rem;
+  padding: 1rem 1.2rem;
   border-radius: 6px;
   font-weight: 600;
   border: none;
