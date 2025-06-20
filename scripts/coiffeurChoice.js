@@ -3,9 +3,9 @@ import { supabase } from './supabase.js';
 const container = document.querySelector(".coiffeur-list");
 let clientLatitude = null;
 let clientLongitude = null;
-let geolocActive = false;
+let geolocActive = true; // 👉 activé par défaut
 
-// 📍 Demande de géolocalisation
+// 📍 Obtenir position
 function obtenirPositionClient() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -21,25 +21,25 @@ function obtenirPositionClient() {
       },
       err => {
         console.warn("⛔ Géolocalisation refusée ou échouée :", err.message);
-        resolve(false); // On continue sans position
+        clientLatitude = null;
+        clientLongitude = null;
+        resolve(false);
       }
     );
   });
 }
 
-// 🔍 Calcule la distance entre 2 points géographiques
 function calculerDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
   const a = Math.sin(dLat / 2) ** 2 +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) ** 2;
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) ** 2;
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
 
-// 📸 Gère les images
 function getOptimizedImage(url) {
   return url?.includes("supabase.co")
     ? `${url}?width=150&quality=70&format=webp`
@@ -55,7 +55,6 @@ function preloadImage(url) {
   });
 }
 
-// 🚀 Charge les coiffeurs
 async function chargerCoiffeurs() {
   if (geolocActive && (clientLatitude === null || clientLongitude === null)) {
     await obtenirPositionClient();
@@ -112,10 +111,16 @@ async function chargerCoiffeurs() {
   }
 }
 
-// ✅ Gestion du bouton ON/OFF
-document.addEventListener("DOMContentLoaded", () => {
+// ✅ Initialisation
+document.addEventListener("DOMContentLoaded", async () => {
   const toggle = document.getElementById("toggle-location");
 
+  // Activation par défaut de la géolocalisation
+  await obtenirPositionClient();
+  if (toggle) toggle.checked = true; // coche le switch
+  await chargerCoiffeurs();
+
+  // Gestion du switch manuel ensuite
   if (toggle) {
     toggle.addEventListener("change", async () => {
       geolocActive = toggle.checked;
@@ -130,6 +135,4 @@ document.addEventListener("DOMContentLoaded", () => {
       await chargerCoiffeurs();
     });
   }
-
-  chargerCoiffeurs();
 });
