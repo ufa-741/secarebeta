@@ -6,7 +6,7 @@
   min-height: -200vh; /* était height: 100vh */
   width: 100vw;
   background-color: #ffffff;
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 20px; /* Ajouté pour limiter l'espace en bas */
   box-sizing: border-box;
 }

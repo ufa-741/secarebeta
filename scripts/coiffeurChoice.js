@@ -1,24 +1,9 @@
 import { supabase } from './supabase.js';
 
 const container = document.querySelector(".coiffeur-list");
-
-function getOptimizedImage(url) {
-  return url?.includes("supabase.co")
-    ? `${url}?width=150&quality=70&format=webp`
-    : "picture/default.jpg";
-}
-
-function preloadImage(url) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.src = url;
-    img.onload = () => resolve(img);
-    img.onerror = () => resolve(null);
-  });
-}
-
 let clientLatitude = null;
 let clientLongitude = null;
+let geolocActive = false;
 
 // 📍 Demande de géolocalisation
 function obtenirPositionClient() {
@@ -36,41 +21,43 @@ function obtenirPositionClient() {
       },
       err => {
         console.warn("⛔ Géolocalisation refusée ou échouée :", err.message);
-        afficherBoutonReessayer(); // 👉 Proposer de réessayer
-        resolve(false); // on continue, mais sans position
+        resolve(false); // On continue sans position
       }
     );
   });
 }
 
-function afficherBoutonReessayer() {
-  const retryBtn = document.createElement("button");
-  retryBtn.textContent = "📍 Autoriser la géolocalisation pour trier par distance";
-  retryBtn.style.margin = "1em auto";
-  retryBtn.style.display = "block";
-
-  retryBtn.addEventListener("click", async () => {
-    retryBtn.remove();
-    await chargerCoiffeurs(true); // 👈 forcer une nouvelle tentative
-  });
-
-  container.prepend(retryBtn);
-}
-
+// 🔍 Calcule la distance entre 2 points géographiques
 function calculerDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+  const a = Math.sin(dLat / 2) ** 2 +
             Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon/2) * Math.sin(dLon/2);
+            Math.sin(dLon / 2) ** 2;
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
 
-// 🚀 Chargement des coiffeurs
-async function chargerCoiffeurs(forceRetry = false) {
-  if (forceRetry || (clientLatitude === null && clientLongitude === null)) {
+// 📸 Gère les images
+function getOptimizedImage(url) {
+  return url?.includes("supabase.co")
+    ? `${url}?width=150&quality=70&format=webp`
+    : "picture/default.jpg";
+}
+
+function preloadImage(url) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+  });
+}
+
+// 🚀 Charge les coiffeurs
+async function chargerCoiffeurs() {
+  if (geolocActive && (clientLatitude === null || clientLongitude === null)) {
     await obtenirPositionClient();
   }
 
@@ -83,7 +70,7 @@ async function chargerCoiffeurs(forceRetry = false) {
     return;
   }
 
-  if (clientLatitude && clientLongitude) {
+  if (geolocActive && clientLatitude && clientLongitude) {
     data.forEach(c => {
       if (c.latitude && c.longitude) {
         c.distance = calculerDistance(clientLatitude, clientLongitude, c.latitude, c.longitude);
@@ -125,4 +112,24 @@ async function chargerCoiffeurs(forceRetry = false) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => chargerCoiffeurs());
+// ✅ Gestion du bouton ON/OFF
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("toggle-location");
+
+  if (toggle) {
+    toggle.addEventListener("change", async () => {
+      geolocActive = toggle.checked;
+
+      if (geolocActive) {
+        await obtenirPositionClient();
+      } else {
+        clientLatitude = null;
+        clientLongitude = null;
+      }
+
+      await chargerCoiffeurs();
+    });
+  }
+
+  chargerCoiffeurs();
+});
