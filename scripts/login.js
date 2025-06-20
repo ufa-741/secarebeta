@@ -7,6 +7,14 @@ const signupForm = document.getElementById("signup-form");
 
 
 
+document.addEventListener("DOMContentLoaded", async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (session) {
+    // ✅ L'utilisateur est déjà connecté, on le redirige
+    window.location.href = "planningcoiffeur.html";
+  }
+});
 
 
 // Vérifie la session utilisateur
