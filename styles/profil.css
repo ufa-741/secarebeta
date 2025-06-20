@@ -1,0 +1,131 @@
+
+
+
+
+/* ===== CONTENU PROFIL ===== */
+.profile-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 0 15px rgba(255,255,255,0.05);
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-header img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-bottom: 1rem;
+}
+
+.profile-header h2 {
+    margin: 0.5rem 0 0.2rem;
+    font-size: 1.8rem;
+}
+
+.profile-header p {
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.profile-form label {
+    display: block;
+    margin-top: 1rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.profile-form input,
+.profile-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #2c2c2c;
+    color: white;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.profile-form button {
+    margin-top: 1.5rem;
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.profile-form button:hover {
+    background-color: #ccc;
+}
+
+
+/* ============================= */
+/* RESPONSIVE PROFIL COIFFEUR   */
+/* ============================= */
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+    }
+
+    .profile-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .profile-form input,
+    .profile-form textarea {
+        font-size: 0.95rem;
+        padding: 0.7rem;
+    }
+
+    header.coiffeur-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    header.coiffeur-header nav {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    header.coiffeur-header .logo {
+        margin: 10px 0;
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-header img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-form button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    header.coiffeur-header nav a {
+        font-size: 1em;
+    }
+}

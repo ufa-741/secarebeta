@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Créer mon profil</title>
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/profil.css" />
+</head>
+<body class="coiffeur">
+
+  <header>
+    <a href="index.html">
+      <img src="picture/logoof.jpg" alt="Logo SECARE" class="logo">
+    </a>
+  </header>
+
+  <main class="profile-container">
+    <div class="profile-header">
+      <img src="picture/default.jpg" alt="Aperçu de la photo" id="preview-photo" />
+      <h2>Créer mon profil</h2>
+    </div>
+
+    
+    <div class="profile-form">
+      <label for="prenom">Prénom</label>
+      <input type="text" id="prenom" />
+
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" />
+
+      <label for="description">Description</label>
+      <textarea id="description" rows="4"></textarea>
+
+      <label for="ville">Ville</label>
+      <input type="text" id="ville" placeholder= required>
+      <div id="preview-coords" style="font-size: 0.9em; color: gray; margin-top: 4px;"></div>
+
+
+
+      <label for="photo">Photo de profil (URL ou fichier)</label>
+      <input type="file" id="photo" accept="image/*" />
+
+      
+
+      <button id="valider-profil">Enregistrer mon profil</button>
+    </div>
+  </main>
+
+  <script type="module" src="scripts/profil.js"></script>
+</body>
+</html>
